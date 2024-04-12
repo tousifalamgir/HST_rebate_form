@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
+import 'package:hst_rebate_form/pdf_form.dart';
+
 
 class HstForm extends StatefulWidget {
   const HstForm({super.key});
@@ -48,12 +50,10 @@ class _HstFormState extends State<HstForm> {
             ]
           ),
           ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Processing Data')),
-                );
-              }
+            onPressed: () async {
+              final pdfFile =
+                  await PdfApi.generateCenteredText('Hello, World!');
+              PdfApi.openFile(pdfFile);
             },
             child: const Text('submit'),
           )
