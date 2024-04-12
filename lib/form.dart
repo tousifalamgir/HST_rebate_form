@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HstForm extends StatefulWidget {
   const HstForm({super.key});
@@ -16,13 +17,35 @@ class _HstFormState extends State<HstForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+          Row(
+            children: <Widget>[
+                Text('Label: '),
+                Expanded(
+                  child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                                ),
+                ),
+            ]
+          ),
+          Row(
+            children: <Widget>[
+                Text('Label2: '),
+                Expanded(
+                  child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                                ),
+                ),
+            ]
           ),
           ElevatedButton(
             onPressed: () {
