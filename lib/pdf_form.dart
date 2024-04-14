@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart';
-import 'package:share_plus/share_plus.dart';
+// import 'package:share_plus/share_plus.dart';
 
 class PdfApi {
   static Future<File> generateCenteredText(String text) async {
@@ -23,27 +23,25 @@ class PdfApi {
   }) async {
     final bytes = await pdf.save();
 
-    final dir = await getApplicationDocumentsDirectory();
-    print('This the path  ${dir.path}/$name');
-    final file = File('${dir.path}/$name');
+    final dir = await getDownloadsDirectory();
+    print('This the path  ${dir?.path}/$name');
+    final file = File('${dir?.path}/$name');
 
     await file.writeAsBytes(bytes);
 
-    sharePdfFile(file.path);
     print(file);
     return file;
   }
 
   static Future openFile(File file) async {
     final url = file.path;
-    print('url ${url}');
-    sharePdfFile(url);
+    print('url $url');
 
     await OpenFile.open(url);
   }
 
-  static void sharePdfFile(String filePath) {
-    final List<XFile> files = [XFile(filePath)];
-    Share.shareXFiles(files, text: 'my_example.pdf');
-  }
+  // static void sharePdfFile(String filePath) {
+  //   final List<XFile> files = [XFile(filePath)];
+  //   Share.shareXFiles(files, text: 'my_example.pdf');
+  // }
 }
